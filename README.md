@@ -1,0 +1,1 @@
+# raqamli_shifoxonalar
