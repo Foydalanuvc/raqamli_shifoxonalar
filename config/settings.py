@@ -17,6 +17,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "crispy_forms",
+    "crispy_bootstrap5",
+    'account',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -27,6 +31,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -88,15 +93,33 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
+
+AUTH_USER_MODEL = 'account.User'
+
 STATICFILES_DIRS = BASE_DIR / 'assets',
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.contrib import messages
+
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'alert alert-success',
+    messages.WARNING: 'alert alert-warning',
+    messages.ERROR: 'alert alert-error',
+    messages.INFO: 'alert alert-info'
+}
+
 
 try:
     from.local_settings import *
 except ImportError:
     pass
+
+LOGIN_URL = 'account:login'
+LOGIN_REDIRECT_URL = 'main:index'
